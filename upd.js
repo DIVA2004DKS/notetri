@@ -1,3 +1,4 @@
+const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 const nodemailer = require('nodemailer');
 
@@ -79,4 +80,19 @@ async function monitorNotes() {
   }
 }
 
+// Create an Express server
+const app = express();
+const PORT = 10001; // Set the port to a number greater than 10,000
+
+// Start the monitoring of notes
 monitorNotes().catch(console.error);
+
+// Set up a simple route
+app.get('/', (req, res) => {
+  res.send('Note Monitoring Service is running.');
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
